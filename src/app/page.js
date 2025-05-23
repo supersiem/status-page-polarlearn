@@ -49,7 +49,7 @@ function StatusGrid() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/status');
+      const response = await fetch('/api/status');
       if (!response.ok) throw new Error('Data ophalen mislukt');
 
       const data = await response.json();
