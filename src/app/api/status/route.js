@@ -1,10 +1,10 @@
+"use server";
 export async function GET() {
     try {
         const response = await fetch('https://api.hetrixtools.com/v3/uptime-monitors', {
             headers: {
                 'Authorization': `Bearer ${process.env.HETRIX_API_KEY}`
-            },
-            next: { revalidate: 60 } // Cache for 60 seconds (1 minute)
+            }
         });
 
         if (!response.ok) throw new Error(`API fout: ${response.status}`);
