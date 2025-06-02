@@ -141,7 +141,7 @@ function StatusGrid() {
     fetchData();
 
     // Set up interval to fetch data every minute (60000 ms)
-    const intervalId = setInterval(fetchData, 60000);
+    const intervalId = setInterval(fetchData, 120000);
 
     // Clean up on unmount
     return () => clearInterval(intervalId);
