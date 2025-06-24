@@ -83,7 +83,7 @@ function DetailCard({ monitor }) {
     <div className="col-span-full mb-6 p-6 rounded-xl bg-gradient-to-b from-gray-700 to-gray-800 shadow-lg transform transition-all duration-300">
       <div className="flex items-center justify-between mb-5">
         {
-          monitor.target && monitor.target.includes('://polarlearn.tech')
+          monitor.target && monitor.target.includes('://polarlearn.tech') || monitor.target && monitor.target.includes('://staging.polarlearn.tech')
             ? 
         <h3 className="text-2xl font-bold t</div>ext-gray-200 flex items-center">
           Details voor <Image src={learnlogo} alt="Polar Learn Logo" width={32} height={32} className="ml-3" /> <span className='ml-2 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-sky-100'>{monitor.name}</span>

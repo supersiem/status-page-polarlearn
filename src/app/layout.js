@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Polarlearn status pagina",
-  description: "Zie de status van Polarlearn",
+  title: "Polar status pagina",
+  description: "Zie de status van de websites en diensten van Polar",
   icons: {
     icon: [
       { url: "/favicon.ico" }
