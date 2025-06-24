@@ -1,15 +1,20 @@
 "use client";
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import learnlogo from './polarlearn.svg';
+import polarlogo from './polar.svg';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <header className="mb-12">
-          <h1 className="text-4xl font-extrabold text-center text-gray-100">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-sky-100">Polarlearn</span> Status
+          <h1 className="text-4xl font-extrabold text-center text-gray-100 flex items-center justify-center">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-sky-100">
+              <Image src={polarlogo} alt="Polar Logo" width={48} height={48} className="inline-block mr-2" />
+              Polar</span> Status
           </h1>
-          <p className="mt-2 text-center text-gray-400">Real-time monitoring van Polarlearn en de diensten die daar bij horen</p>
+          <p className="mt-2 text-center text-gray-400">Zie de live status van de websites en diensen van Polar</p>
         </header>
         <StatusGrid />
       </div>
@@ -25,7 +30,7 @@ function StatusCard({ monitor, isSelected, onClick }) {
   return (
     <div
       className={`p-8 rounded-xl shadow-sm transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg cursor-pointer ${isInMaintenance
-        ? 'bg-gray-800 border-l-4 border-blue-500'
+        ? 'bg-gray-800 border-l-4 border-yellow-500'
         : isUp
           ? 'bg-gray-800 border-l-4 border-green-500'
           : 'bg-gray-800 border-l-4 border-red-500'
@@ -35,9 +40,9 @@ function StatusCard({ monitor, isSelected, onClick }) {
       <h3 className="text-xl font-semibold mb-4 text-gray-200">{monitor.name}</h3>
       <div className="flex flex-col space-y-4">
         <div className="flex items-center">
-          <div className={`w-4 h-4 rounded-full mr-3 ${isInMaintenance ? 'bg-blue-500' : isUp ? 'bg-green-500' : 'bg-red-500'
+          <div className={`w-4 h-4 rounded-full mr-3 ${isInMaintenance ? 'bg-yellow-500' : isUp ? 'bg-green-500' : 'bg-red-500'
             } animate-pulse`}></div>
-          <span className={`text-lg font-medium ${isInMaintenance ? 'text-blue-400' : isUp ? 'text-green-400' : 'text-red-400'
+          <span className={`text-lg font-medium ${isInMaintenance ? 'text-yellow-400' : isUp ? 'text-green-400' : 'text-red-400'
             }`}>
             {isInMaintenance ? 'Onderhoud' : isUp ? 'Online' : 'Offline'}
           </span>
@@ -71,23 +76,32 @@ function DetailCard({ monitor }) {
       return `${days} ${days === 1 ? 'dag' : 'dagen'} geleden`;
     }
   };
-
+  console.log(monitor);
   return (
     <div className="col-span-full mb-6 p-6 rounded-xl bg-gradient-to-b from-gray-700 to-gray-800 shadow-lg transform transition-all duration-300">
       <div className="flex items-center justify-between mb-5">
-        <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-sky-100">
+        {
+          monitor.target && monitor.target.includes('://polarlearn.tech')
+            ? 
+        <h3 className="text-2xl font-bold t</div>ext-gray-200 flex items-center">
+          Details voor <Image src={learnlogo} alt="Polar Learn Logo" width={32} height={32} className="ml-3" /> <span className='ml-2 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-sky-100'>{monitor.name}</span>
+        </h3>
+            :
+        <h3 className="text-2xl font-bold text-gray-200">
           Details voor {monitor.name}
         </h3>
+        }
+
         <div className="flex items-center px-3 py-1 rounded-full bg-gray-800/50">
-          <div className={`w-3 h-3 rounded-full mr-2 ${isInMaintenance ? 'bg-blue-500' : isUp ? 'bg-green-500' : 'bg-red-500'} animate-pulse`}></div>
-          <span className={`text-sm font-medium ${isInMaintenance ? 'text-blue-400' : isUp ? 'text-green-400' : 'text-red-400'}`}>
+          <div className={`w-3 h-3 rounded-full mr-2 ${isInMaintenance ? 'bg-yellow-500' : isUp ? 'bg-green-500' : 'bg-red-500'} animate-pulse`}></div>
+          <span className={`text-sm font-medium ${isInMaintenance ? 'text-yellow-500' : isUp ? 'text-green-400' : 'text-red-400'}`}>
             {isInMaintenance ? 'Onderhoud' : isUp ? 'Online' : 'Offline'}
           </span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-gray-800 p-5 rounded-lg shadow-inner border border-gray-700 hover:border-sky-800 transition-all duration-300">
+        <div className="bg-gray-800 p-5 rounded-lg shadow-inner border border-gray-700 hover:border-sky-400 transition-all duration-300">
           <p className="text-gray-400 text-sm mb-2">Uptime</p>
           <p className="text-3xl font-bold text-gray-100">{monitor.uptime ? parseFloat(monitor.uptime).toFixed(2) : 'error'}%</p>
           <div className="mt-3 w-full bg-gray-700 rounded-full h-2">
@@ -96,7 +110,7 @@ function DetailCard({ monitor }) {
           </div>
         </div>
 
-        <div className="bg-gray-800 p-5 rounded-lg shadow-inner border border-gray-700 hover:border-sky-800 transition-all duration-300">
+        <div className="bg-gray-800 p-5 rounded-lg shadow-inner border border-gray-700 hover:border-sky-400 transition-all duration-300">
           <p className="text-gray-400 text-sm mb-2">Gemiddelde responstijd</p>
           <p className="text-3xl font-bold text-gray-100">
             {monitor.locations?.amsterdam?.response_time ? monitor.locations.amsterdam.response_time : 'error'}<span className="text-xl text-gray-500">ms</span>
@@ -107,7 +121,7 @@ function DetailCard({ monitor }) {
           </div>
         </div>
 
-        <div className="bg-gray-800 p-5 rounded-lg shadow-inner border border-gray-700 hover:border-sky-800 transition-all duration-300">
+        <div className="bg-gray-800 p-5 rounded-lg shadow-inner border border-gray-700 hover:border-sky-400 transition-all duration-300">
           <p className="text-gray-400 text-sm mb-2">Laatste check</p>
           <p className="text-3xl font-bold text-gray-100">{formatTimeAgo(monitor.last_check)}</p>
           <div className="mt-3 text-xs text-gray-500">Automatisch gecontroleerd</div>
