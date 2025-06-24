@@ -10,9 +10,11 @@ export default function Home() {
       <div className="max-w-7xl mx-auto">
         <header className="mb-12">
           <h1 className="text-4xl font-extrabold text-center text-gray-100 flex items-center justify-center">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-sky-100">
-              <Image src={polarlogo} alt="Polar Logo" width={48} height={48} className="inline-block mr-2" />
-              Polar</span> Status
+            <Image src={polarlogo} alt="Polar Logo" width={48} height={48} className="inline-block mr-2" />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-sky-100 pr-2">
+              Polar 
+            </span>
+            status
           </h1>
           <p className="mt-2 text-center text-gray-400">Zie de live status van de websites en diensen van Polar</p>
         </header>
